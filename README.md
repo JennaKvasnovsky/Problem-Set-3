@@ -80,7 +80,6 @@ for epoch in trange(num_epochs):
     # ... (validation loop)
 
     # Display a sample of images with true and predicted labels
-    # # Display a sample of images with true and predicted labels
 sample_images, sample_labels = next(iter(val_loader))
 sample_images, sample_labels = sample_images[:5].to(device), sample_labels[:5].to(device)
 
