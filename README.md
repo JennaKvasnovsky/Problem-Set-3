@@ -80,7 +80,27 @@ for epoch in trange(num_epochs):
     # ... (validation loop)
 
     # Display a sample of images with true and predicted labels
-    # ... (visualization)
+    # # Display a sample of images with true and predicted labels
+sample_images, sample_labels = next(iter(val_loader))
+sample_images, sample_labels = sample_images[:5].to(device), sample_labels[:5].to(device)
+
+with torch.no_grad():
+    outputs = alexnet(sample_images)
+    _, predicted_classes = torch.max(outputs, 1)
+
+# Convert to numpy arrays for visualization
+sample_images = sample_images.cpu().numpy()
+sample_labels = sample_labels.cpu().numpy()
+predicted_classes = predicted_classes.cpu().numpy()
+
+# Plot the images with true and predicted labels
+fig, axes = plt.subplots(1, 5, figsize=(15, 3))
+for i in range(5):
+    axes[i].imshow(np.transpose(sample_images[i], (1, 2, 0)))
+    axes[i].set_title(f'True: {sample_labels[i]}, Predicted: {predicted_classes[i]}')
+    axes[i].axis('off')
+
+plt.show()
 ```
 
 ## 7. Results Visualization
